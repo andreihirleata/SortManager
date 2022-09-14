@@ -1,7 +1,7 @@
 # Sort Manager
 
 ## About
-Java project built to demonstrate the usage of a bubble sort algorithm in order to sort an array containing integers
+Java project that demonstrates the use of Bubble Sort, Binary Tree Sort, Merge Sort algorithms to sort an array.
 
 The algorithm implements the below interface and fulfils its contract
 ```JAVA
