@@ -1,4 +1,4 @@
-# Bubble sort
+# Sort Manager
 
 ## About
 Java project built to demonstrate the usage of a bubble sort algorithm in order to sort an array containing integers
@@ -9,44 +9,112 @@ The algorithm implements the below interface and fulfils its contract
 public interface Sorter {
     int[] sortArray(int[] arrayToSort);
 }
-
 ```
 
-The algorithm loops through the array and compares elements with consecutive indexes and if the first compared element
-is lowe than the second swaps their places in the array. After each loop the iteration starts from the <code >array.length - i - 1</code>
-to prevent redundant rechecks of already checked elements in the array. The <code>swap</code> boolean checks if any swaps
-have taken place through a complete iteration of the array to prevent redundant rechecks of the elements as if we iterate
-through the whole array and no swaps were required it means the array is already sorted and we can safely break the loop.
-```JAVA
-public  class BubbleSortOne implements Sorter {
+## Sorting algorithms
 
-    @Override
+* Bubble Sort  
+The bubble sort algorithm iterates through the array and every time it encounters an element which is lower that the 
+next one in the array swaps their place.
+![img_2.png](img_2.png)
+We keep track if any swaps have taken place in a loop iteration with the <code>swapped</code> to prevent redundant 
+loops through the array as if no swaps have taken place in an iteration it means the array is already sorted.
+```JAVA
     public int[] sortArray(int[] arrayToSort) {
         if(arrayToSort.length <= 1) return arrayToSort;
-        int[] arrayCopy = arrayToSort.clone();
 
         boolean swapped;
         int numToSwap;
 
-        for(int i = 0; i < arrayCopy.length - 1; i++) {
+        for(int i = 0; i < arrayToSort.length - 1; i++) {
             swapped = false;
-            for (int j = 0; j < arrayCopy.length - i - 1; j++) {
-                if(arrayCopy[j] > arrayCopy[j + 1]) {
-                    numToSwap = arrayCopy[j];
-                    arrayCopy[j] = arrayCopy[j+1];
-                    arrayCopy[j+1] = numToSwap;
+            for (int j = 0; j < arrayToSort.length - i - 1; j++) {
+                if(arrayToSort[j] > arrayToSort[j + 1]) {
+                    numToSwap = arrayToSort[j];
+                    arrayToSort[j] = arrayToSort[j+1];
+                    arrayToSort[j+1] = numToSwap;
                     swapped = true;
                 }
             }
             if (!swapped) break;
         }
-        return arrayCopy;
+
+
+        return arrayToSort;
     }
 }
 ```
-The sortArray method does not change the original array as it returns a new copy of the array.
+
+* Merge Sort  
+The merge sort algorithm breaks down an array in half each iteration until only single element arrays remain
+then rejoins them using the <code>merge</code> method recursively until all the final sorted array is obtained.
+```JAVA
+    public static void merge(int[] arr, int[] leftArray, int[] rightArray, int left, int right) {
+        int leftIndex = 0;
+        int rightIndex = 0;
+        int mergedArrayPosition = 0;
+
+        while (leftIndex < left && rightIndex < right) {
+            if (leftArray[leftIndex] < rightArray[rightIndex]) {
+                arr[mergedArrayPosition++] = leftArray[leftIndex++];
+            } else  {
+                arr[mergedArrayPosition++] = rightArray[rightIndex++];
+            }
+        }
+
+        while (leftIndex < left) {
+
+            arr[mergedArrayPosition++] = leftArray[leftIndex++];
+        }
+
+        while (rightIndex < right) {
+
+            arr[mergedArrayPosition++] = rightArray[rightIndex++];
+        }
+
+    }
+```
+![img_3.png](img_3.png)
+* Binary Tree Sort  
+The binary tree sort creates a binary search tree from the elements of the input array and performs an in-order traversal
+on the created binary search tree to get the elements in sorted order and adds returns a sorted array. The insertion process
+uses the <code>insert(Node root, int data)</code> method recursively.
+```JAVA
+    void insert(Node root, int data) {
+        if (root.data >= data) {
+            if (root.left == null) {
+                root.left = new Node(data);
+            } else {
+                insert(root.left, data);
+            }
+        } else {
+            if (root.right == null) {
+                root.right = new Node(data);
+            } else {
+                insert(root.right, data);
+            }
+        }
+    }
+```
+  ![Binary Search Tree Example](https://blog.penjee.com/wp-content/uploads/2015/11/binary-search-tree-insertion-animation.gif)  
+In order to merge the binary search tree back into a sorted array we traverse it adding the left most node's data into the
+array in order.
+```JAVA
+    public int inorderArr(Node root,int[] arr,int index) {
+        if (root != null) {
+            if (root.left != null) {
+                index = inorderArr(root.left, arr, index);
+            }
+            arr[index++] = root.data;
+            if (root.right != null) {
+                index = inorderArr(root.right, arr, index);
+            }
+        }
+        return index;
+    }
+```
 ## Execution example
-![img.png](img.png)
+![img_1.png](img_1.png)
 ## Getting started
 The project requires the Java SDK to run. Simply clone the repo and you'll be able to build and run the project.
 

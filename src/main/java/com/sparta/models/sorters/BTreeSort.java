@@ -31,8 +31,7 @@ public class BTreeSort implements Sorter {
             if (root.left != null) {
                 index = inorderArr(root.left, arr, index);
             }
-            arr[index] = root.data;
-            index++;
+            arr[index++] = root.data;
             if (root.right != null) {
                 index = inorderArr(root.right, arr, index);
             }
@@ -41,7 +40,8 @@ public class BTreeSort implements Sorter {
     }
     @Override
     public int[] sortArray(int[] arrayToSort) {
-        this.inorderArr(createBTreeFromArray(arrayToSort),arrayToSort,0);
+        if (arrayToSort.length == 0) return new int[0];
+        inorderArr(createBTreeFromArray(arrayToSort),arrayToSort,0);
         return arrayToSort;
     }
 }

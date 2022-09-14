@@ -10,12 +10,18 @@ import java.util.Scanner;
 public class DisplayManager {
     public static void displaySort() throws CustomErr {
         Scanner sc = new Scanner(System.in);
+        int arrayLength;
+        int bound;
+
         System.out.println("Please input the length of the array to generate: ");
-        int arrayLength = sc.nextInt();
+        arrayLength = sc.nextInt();
+        if(arrayLength < 0 ) throw new CustomErr("Please enter a positive number");
+
         System.out.println("Please input the upper limit for the elements of the array: ");
-        int bound = sc.nextInt();
+        bound = sc.nextInt();
+        if(bound < 0) throw new CustomErr("Please enter a positive number");
+
         int[] array = RandArray.generateRandArr(arrayLength,bound);
-        int[] testArray = {1,3,2,2,1,6,7,44,32,22};
         System.out.println("Please select one of the following options to sort the array: ");
         System.out.println("1 Bubble sort");
         System.out.println("2 Merge sort");

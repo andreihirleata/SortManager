@@ -1,7 +1,6 @@
 package com.sparta.models.util;
 
 import java.util.Random;
-import java.util.stream.Stream;
 
 public class RandArray {
     public static  int[] generateRandArr(int length,int bound) {
