@@ -1,4 +1,4 @@
-package com.sparta.controllers;
+package com.sparta.models.sorters;
 
 public enum SorterTypes {
     Bubble,
