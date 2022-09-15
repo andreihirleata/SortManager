@@ -40,8 +40,11 @@ public class BTreeSort implements Sorter {
     }
     @Override
     public int[] sortArray(int[] arrayToSort) {
+//        long startTime = System.nanoTime();
         if (arrayToSort.length == 0) return new int[0];
         inorderArr(createBTreeFromArray(arrayToSort),arrayToSort,0);
+//        long endTime = System.nanoTime();
+//        System.out.println("It took " + (endTime - startTime) / 1_000_000_000.00000 + " seconds to execute");
         return arrayToSort;
     }
 }
