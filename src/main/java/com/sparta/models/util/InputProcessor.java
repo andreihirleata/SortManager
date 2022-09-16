@@ -1,15 +1,15 @@
 package com.sparta.models.util;
 
-import com.sparta.views.DisplayManager;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import static com.sparta.models.sorters.MergeSort.logger;
+
 public class InputProcessor {
 
-    public static Logger logger = LogManager.getLogger(DisplayManager.class);
+
     public static int processInt(String s,int bound) {
         try {
             System.out.println(s);
@@ -18,6 +18,7 @@ public class InputProcessor {
             while (choice < 0 || choice > bound) {
                 choice = processInt("Please enter a valid choice.", bound);
             }
+            logger.debug("User input " + choice);
             return choice;
         } catch (InputMismatchException e) {
             logger.error(e.getMessage(), e);
@@ -35,6 +36,7 @@ public class InputProcessor {
         } else {
             System.out.println("Please enter \"yes\" or \"no\"");
             String choice = sc.nextLine();
+            logger.debug("User input " + choice);
             return yesOrNo(choice);
         }
     }

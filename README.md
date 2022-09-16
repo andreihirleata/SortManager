@@ -114,7 +114,7 @@ array in order.
     }
 ```
 ## Execution example
-![img_1.png](img_1.png)
+![img_6.png](img_6.png)
 ## Getting started
 The project requires the Java SDK to run. Simply clone the repo and you'll be able to build and run the project.
 

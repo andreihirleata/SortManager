@@ -1,8 +1,14 @@
 package com.sparta.models.sorters;
 
 
-public class MergeSort implements Sorter {
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.util.Arrays;
+
+
+public class MergeSort implements Sorter {
+    public static Logger logger = LogManager.getLogger();
     public static void merge(int[] arr, int[] leftArray, int[] rightArray, int left, int right) {
         int leftIndex = 0;
         int rightIndex = 0;
@@ -49,7 +55,9 @@ public class MergeSort implements Sorter {
     }
     @Override
     public int[] sortArray(int[] arrayToSort) {
+        logger.trace("Logging start of MergeSort" + Arrays.toString(arrayToSort));
         mergeSort(arrayToSort,arrayToSort.length);
+        logger.trace("Logging end of MergeSort" + Arrays.toString(arrayToSort));
         return arrayToSort;
     }
 }
